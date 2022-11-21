@@ -6,6 +6,7 @@ type Listitem {
   id: ID!
   quantity: Float!
   completed: Boolean!
+  list: List!
   item: Item!
 }
 
@@ -13,7 +14,8 @@ type List {
   id: ID!
   name: String!
   user: User!
-  listItem: [Listitem!]!
+  items(offset: Int = 0, limit: Int = 10, search: String): [Listitem!]!
+  totalItems: Float!
 }
 
 type User {
@@ -50,7 +52,7 @@ type Query {
   item(id: ID!): Item!
   lists(offset: Int = 0, limit: Int = 10, search: String): [List!]!
   list(id: ID!): List!
-  listitem: [Listitem!]!
+  listitem(id: String!): Listitem!
 }
 
 """Valid roles for the user"""
@@ -71,8 +73,9 @@ type Mutation {
   createList(createListInput: CreateListInput!): List!
   updateList(updateListInput: UpdateListInput!): List!
   removeList(id: ID!): List!
-  executeSeed: Boolean!
   createListitem(createListitemInput: CreateListitemInput!): Listitem!
+  updateListitem(updateListitemInput: UpdateListitemInput!): Listitem!
+  executeSeed: Boolean!
 }
 
 input SignupInput {
@@ -119,4 +122,12 @@ input CreateListitemInput {
   completed: Boolean = false
   listId: ID!
   itemId: ID!
+}
+
+input UpdateListitemInput {
+  quantity: Float = 0
+  completed: Boolean = false
+  listId: ID
+  itemId: ID
+  id: ID!
 }

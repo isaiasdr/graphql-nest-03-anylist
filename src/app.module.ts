@@ -55,12 +55,18 @@ import { ListitemModule } from './listitem/listitem.module';
 
     TypeOrmModule.forRoot({
       type: 'postgres',
+      ssl: ( process.env.STATE === 'prod' )
+        ? {
+          rejectUnauthorized: false,
+          sslMode: 'require',
+        }
+        : false as any,
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
       username:process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true,
     }),
     

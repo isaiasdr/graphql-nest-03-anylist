@@ -1,3 +1,5 @@
+import e from "express";
+
 export const SEED_USERS = [
     {
         fullName: 'Fernando Herrera',
@@ -20,7 +22,13 @@ export const SEED_USERS = [
         roles: ['user'],
         isActive: false
     },
-]
+];
+
+export const SEED_LISTS = [
+    { name: 'supermercado', },
+    { name: 'diario', },
+    { name: 'Fin de semana', },
+];
 
 export const SEED_ITEMS = [
     {

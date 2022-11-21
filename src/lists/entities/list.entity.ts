@@ -25,6 +25,6 @@ export class List {
   user: User;
 
   @OneToMany(() => Listitem, (listItem) => listItem.list, { lazy: true })
-  @Field( () => [Listitem] )
+  /* @Field( () => [Listitem] ) */
   listItem: Listitem[];
 }
